@@ -96,6 +96,11 @@ module.exports = function(grunt) {
         command: 'git push live master'
       }
     },
+    env: {
+      server: {
+        NODE_ENV: 'production'
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -106,6 +111,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-env');
 
   grunt.registerTask('server-dev', function (target) {
     grunt.task.run([ 'nodemon', 'watch' ]);
@@ -133,6 +139,9 @@ module.exports = function(grunt) {
       console.log('prod');
       // add your production server task here
       grunt.task.run(['shell:prodServer']);
+    } else if (grunt.option('server')) {
+      console.log('start prod server');
+      grunt.task.run(['env:server', 'server-dev']);
     } else {
       console.log(' no prod');
       grunt.task.run([ 'server-dev' ]);
