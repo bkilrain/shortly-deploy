@@ -1,9 +1,10 @@
-var db = require('../config');
+var urlsSchema = require('../collections/links.js');
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 
+var Link = mongoose.model('Link', urlsSchema);
 
-
+module.exports = Link;
 
 // var Link = db.Model.extend({
 //   tableName: 'urls',
@@ -19,8 +20,3 @@ var mongoose = require('mongoose');
 //     });
 //   }
 // });
-
-var Link = mongoose.model('Link', db.urlsSchema);
-
-
-module.exports = Link;

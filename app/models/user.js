@@ -1,7 +1,12 @@
-var db = require('../config');
-// var bcrypt = require('bcrypt-nodejs');
-// var Promise = require('bluebird');
+var usersSchema = require('../collections/users.js');
+var bcrypt = require('bcrypt-nodejs');
+var Promise = require('bluebird');
 var mongoose = require('mongoose');
+
+var User = mongoose.model('User', usersSchema);
+
+
+module.exports = User;
 
 
 // var User = db.Model.extend({
@@ -23,7 +28,3 @@ var mongoose = require('mongoose');
 //       });
 //   }
 // });
-console.log('users')
-var User = mongoose.model('User', db.usersSchema);
-
-module.exports = User;

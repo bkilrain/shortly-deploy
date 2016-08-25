@@ -6,41 +6,18 @@ if (process.env.NODE_ENV) {
   mongoose.connect('mongodb://45.55.23.9/shortly');
 } else {
   console.log('DEV ENV!');
-  mongoose.connect('mongodb://localhost/shortly');
+  mongoose.connect('mongodb://localhost/shortly/models/users');
 }
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  
-  var urlsSchema = new mongoose.Schema({
-    url: String,
-    baseUrl: String,
-    code: String,
-    title: String,
-    visits: Number,
-    date: { type: Date, default: Date.now }
-  });
-
-
-  var usersSchema = new mongoose.Schema({
-    username: String,
-    password: String,
-    date: { type: Date, default: Date.now }
-  });
-
-
-  // console.log('were connected', db);
-  // mongoose.model('Link', urlsSchema);
-  // mongoose.model('User', usersSchema);
+  console.log('hello');
 });
+  
 
 
 module.exports = db;
-
-
-
-
 
 
 

@@ -1,9 +1,13 @@
-// // NOTE: this file is not needed when using MongoDB
-// var db = require('../config');
-// var Link = require('../models/link');
+var mongoose = require('mongoose');
 
-// var Links = new db.Collection();
+var urlsSchema = new mongoose.Schema({
+  url: String,
+  baseUrl: String,
+  code: String,
+  title: String,
+  visits: Number,
+  date: { type: Date, default: Date.now }
+});
 
-// Links.model = Link;
 
-// module.exports = Links;
+module.exports = urlsSchema;
