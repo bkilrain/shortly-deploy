@@ -6,13 +6,27 @@ module.exports = function(grunt) {
       options: {
         separator: ';',
       },
-      dist: {
+      deps: {
         src: [
-          'public/client/**/*.js',
-          'public/lib/**/*.js',
+          'public/lib/jquery.js',
+          'public/lib/underscore.js',
+          'public/lib/backbone.js',
+          'public/lib/handlebars.js'
         ],
-        dest: 'public/dist/client.js',
+        dest: 'public/dist/deps.js'
       },
+      client: {
+        src: [
+          'public/client/app.js',
+          'public/client/link.js',
+          'public/client/links.js',
+          'public/client/linkView.js',
+          'public/client/linksView.js',
+          'public/client/createLinkView.js',
+          'public/client/router.js'
+        ],
+        dest: 'public/dist/client.js'
+      },  
     },
 
     mochaTest: {
@@ -35,12 +49,20 @@ module.exports = function(grunt) {
         files: {
           'public/dist/client.min.js': ['public/dist/client.js']
         }
+      },
+      deps: {
+        files: {
+          'public/dist/deps.min.js': ['public/dist/deps.js']
+        }
       }
     },
 
     eslint: {
       target: [
-        // Add list of files to lint here
+        'public/client/**/*.js',
+        'app/**/*.js',
+        './server-config.js',
+        './server.js'
       ]
     },
 
@@ -98,7 +120,10 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'concat:dist',
+    'eslint',
+    'concat:deps',
+    'concat:client',
+    'uglify:deps',
     'uglify:client',
     'cssmin'
   ]);
@@ -116,6 +141,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'test',
+    'build',
     'upload'
   ]);
 
