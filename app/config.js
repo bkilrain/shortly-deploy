@@ -6,7 +6,7 @@ if (process.env.NODE_ENV) {
   mongoose.connect('mongodb://45.55.23.9/shortly');
 } else {
   console.log('DEV ENV!');
-  mongoose.connect('mongodb://localhost/shortly/models/users');
+  mongoose.connect('mongodb://localhost/shortly');
 }
 var db = mongoose.connection;
 

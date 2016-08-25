@@ -144,7 +144,7 @@ module.exports = function(grunt) {
       grunt.task.run(['shell:prodServer']);
     } else if (grunt.option('server')) {
       console.log('start prod server');
-      grunt.task.run(['env:server', 'shell:mongo', 'server-dev']);
+      grunt.task.run(['env:server', 'server-dev']);
     } else {
       console.log(' no prod');
       grunt.task.run([ 'server-dev' ]);
