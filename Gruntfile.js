@@ -3,6 +3,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ';',
+      },
+      dist: {
+        src: [
+          'public/client/**/*.js',
+          'public/lib/**/*.js',
+        ],
+        dest: 'public/dist/client.js',
+      },
     },
 
     mochaTest: {
@@ -21,6 +31,11 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      client: {
+        files: {
+          'public/dist/client.min.js': ['public/dist/client.js']
+        }
+      }
     },
 
     eslint: {
@@ -30,6 +45,11 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      target: {
+        files: {
+          'public/dist/style.min.css': ['public/style.css']
+        }
+      }
     },
 
     watch: {
@@ -78,6 +98,9 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'concat:dist',
+    'uglify:client',
+    'cssmin'
   ]);
 
   grunt.registerTask('upload', function(n) {
