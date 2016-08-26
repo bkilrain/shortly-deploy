@@ -20,18 +20,9 @@ usersSchema.pre('save', function (done) {
 
 usersSchema.methods.comparePassword = function(attemptedPassword, callback) {
   bcrypt.compare(attemptedPassword, this.password, function(err, isMatch) {
-    console.log(err); //thisworks?
     callback(isMatch);
   });
 };
 
-// usersSchema.methods.hashPassword = function() {
-// };
 
 module.exports = usersSchema;
-
-// var cipher = Promise.promisify(bcrypt.hash);
-//   return cipher(this.get('password'), null, null).bind(this)
-//     .then(function(hash) {
-//       this.set('password', hash);
-//     });
